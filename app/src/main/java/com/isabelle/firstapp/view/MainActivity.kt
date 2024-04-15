@@ -1,13 +1,17 @@
 package com.isabelle.firstapp.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.isabelle.firstapp.databinding.ActivityMainBinding
-//import com.isabelle.firstapp.databinding.TelaLinearBinding
-import java.time.LocalDate
-import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var navController: NavController
 
     private var _binding: ActivityMainBinding? = null
     private val binding: ActivityMainBinding get() = _binding!!
@@ -17,21 +21,9 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-//            var email = binding.edtEmail.editableText.toString()
-//
-//            if(email.contains("@") && email.contains(".com")){
-//                binding.tvEmail.text = "E-mail: ${email}"
-//            } else {
-//                binding.tvEmail.text = "E-mail: Inválido"
-//            }
-//
-//            var telefone = binding.edtTelefone.editableText.toString()
-//            if (telefone.length == 11){
-//                binding.tvTelefone.text = "Telefone: ${telefone}"
-//            }else{
-//                binding.tvTelefone.text = "Telefone: Inválido"
-//            }
-//        }
-   }
+        val navHostFragment = supportFragmentManager.findFragmentById(binding.fragmentContainerView.id) as NavHostFragment
+        navController = navHostFragment.navController
+        appBarConfiguration = AppBarConfiguration(navController.graph)
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+    }
 }

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.HomeFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".view.HomeFragment"
+    android:padding="10dp">
 
-    <!-- TODO: Update blank fragment layout -->
     <Button
-        android:id="@+id/btnCalculo"
+        android:id="@+id/btnCadastroPessoa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Calcular idade" />
+        android:text="Cadastrar Pessoa"/>
 
     <Button
         android:id="@+id/btnVerifica"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Verificar telefone e e-mail" />
-
+        android:text="Verificar telefone e e-mail"/>
 </LinearLayout>
