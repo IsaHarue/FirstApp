@@ -1,5 +1,6 @@
 package com.isabelle.firstapp.view
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -39,12 +40,18 @@ import java.time.LocalDateTime
 //
 //        binding.spinnerSexo.adapter = ad
 
+        // Carregar a pessoa caso tenha selecionado
+        arguments?.let {
+            viewModel.getPessoa(it.getInt("pessoaId"))
+
+        }
+
         binding.btnEnviar.setOnClickListener {
             val nome = binding.edtNome.editableText.toString()
             val anoNascimento = binding.edtAnoNascimento.editableText.toString()
 
 
-            if (nome != "" && anoNascimento != "") {
+            if (nome != "" && anoNascimento != "" && binding.rbM.isChecked || binding.rbF.isChecked) {
 
                 val anoAtual = LocalDateTime.now().year
                 val idade = anoAtual - anoNascimento.toInt()
@@ -80,8 +87,14 @@ import java.time.LocalDateTime
                 )
 
 
+                viewModel.pessoa.value?.let {
+                    pessoa.id = it.id
+                    viewModel.update(pessoa)
+                }?: run {
+                    viewModel.insert(pessoa)
+                }
 
-                viewModel.insert(pessoa)
+
                 findNavController().navigateUp()
 
                 binding.edtNome.editableText.clear()
@@ -92,7 +105,35 @@ import java.time.LocalDateTime
                 Toast.makeText(requireContext(), "Digite os dados", Toast.LENGTH_LONG).show()
             }
         }
+
+        binding.btnDeletar.setOnClickListener {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Exclusão de pessoa")
+                .setMessage("Você relamente dseja excluir?")
+                .setPositiveButton("sim"){_,_ ->
+                    viewModel.delete(viewModel.pessoa.value?.id?:0)
+                    findNavController().navigateUp()
+                }
+                .setNegativeButton("não"){_,_ ->}
+                .show()
+
+        }
+
+        viewModel.pessoa.observe(viewLifecycleOwner){pessoa ->
+            binding.edtNome.setText(pessoa.nome)
+            binding.edtAnoNascimento.setText((LocalDateTime.now().year - pessoa.idade).toString())
+            if (pessoa.sexo == "homem"){
+                binding.rbM.isChecked = true
+            } else{
+                binding.rbF.isChecked = true
+            }
+
+            binding.btnDeletar.visibility = View.VISIBLE
+        }
+
+
     }
+
 
 //    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 //        Toast.makeText(requireContext(), sexos[position], Toast.LENGTH_LONG).show()

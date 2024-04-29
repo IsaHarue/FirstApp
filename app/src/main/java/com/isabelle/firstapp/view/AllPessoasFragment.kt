@@ -37,8 +37,12 @@ class AllPessoasFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //quando clicar em algum item da lista
-        adapter = PessoaAdapter(viewModel.pessoaList.value){ pessoa ->
-
+        adapter = PessoaAdapter(viewModel.pessoaList.value){pessoa ->
+            val pessoaBundle = Bundle()
+            pessoaBundle.putInt("pessoaId", pessoa.id)
+            arguments = pessoaBundle
+//            findNavController().navigate(R.id.pessoaFragment, arguments)
+            findNavController().navigate(R.id.pessoaDetailFragment, arguments)
         }
 
         // Configura a recycler

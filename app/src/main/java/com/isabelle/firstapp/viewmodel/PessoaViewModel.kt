@@ -24,7 +24,7 @@ class PessoaViewModel(application: Application) : AndroidViewModel(application) 
 
     fun getPessoa(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getPessoa(id)
+            mPessoa.postValue(repository.getPessoa(id))
         }
     }
 

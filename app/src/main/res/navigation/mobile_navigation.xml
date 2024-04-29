@@ -28,4 +28,8 @@
         android:name="com.isabelle.firstapp.view.AllPessoasFragment"
         android:label="Pessoas"
         tools:layout="@layout/fragment_all_pessoas" />
+    <fragment
+        android:id="@+id/pessoaDetailFragment"
+        android:name="com.isabelle.firstapp.view.PessoaDetailFragment"
+        android:label="PessoaDetailFragment" />
 </navigation>

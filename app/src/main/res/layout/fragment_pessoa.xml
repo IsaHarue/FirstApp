@@ -18,18 +18,25 @@
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content" />-->
 
-
-    <RadioButton
-        android:id="@+id/rbM"
+    <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Masculino" />
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/rbM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Masculino" />
 
-    <RadioButton
-        android:id="@+id/rbF"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Feminino" />
+        <RadioButton
+            android:id="@+id/rbF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Feminino" />
+    </RadioGroup>
+
 
     <TextView
         android:layout_width="match_parent"
@@ -69,5 +76,15 @@
         android:layout_gravity="center"
         android:text="Enviar"
         android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/btnDeletar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Excluir"
+        android:layout_marginTop="20dp"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:visibility="invisible"
+        />
 
 </LinearLayout>

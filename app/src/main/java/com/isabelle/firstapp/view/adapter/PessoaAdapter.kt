@@ -14,6 +14,7 @@ class PessoaAdapter(pessoas: List<Pessoa>?, private val clickListListener: (Pess
 
     class PessoaViewHolder(private val binding: ListItemPessoaBinding) :
         RecyclerView.ViewHolder(binding.root) {
+            //carrega as informacoes da pessoa na lista
         fun bind(pessoa: Pessoa, clickListListener: (Pessoa) -> Unit) {
             binding.tvNome.text = pessoa.nome
             binding.tvIdade.text = pessoa.idade.toString()
@@ -22,9 +23,20 @@ class PessoaAdapter(pessoas: List<Pessoa>?, private val clickListListener: (Pess
             if (pessoa.sexo == "homem"){
                 binding.ivM.visibility = View.VISIBLE
                 binding.ivF.visibility = View.GONE
-            } else if (pessoa.sexo == "mulher"){
+            } else {
                 binding.ivF.visibility = View.VISIBLE
                 binding.ivM.visibility = View.GONE
+            }
+
+//            if (pessoa.sexo == "homem"){
+//                binding.ivM.setImageResource(R.drawable.baseline_male_24)
+//            }else{
+//                binding.ivF.setImageResource(R.drawable.baseline_female_24)
+//            }
+
+                //configura o click de algum item da lista
+            binding.root.setOnClickListener{
+                clickListListener(pessoa)
             }
         }
     }
@@ -43,6 +55,7 @@ class PessoaAdapter(pessoas: List<Pessoa>?, private val clickListListener: (Pess
         holder.bind(pessoaList[position], clickListListener)
     }
 
+    //carrega a lista de pessoa para serem exibidas
     fun updatePessoas(list: List<Pessoa>) {
         pessoaList = list
         notifyDataSetChanged()
